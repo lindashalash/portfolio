@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linda Emilia Shalash - CS Portfolio</title>
     <style>
+        :root {
+            /* Dark mode colors (default) */
+            --bg-primary: linear-gradient(135deg, #1a0f1a 0%, #2d1b3d 50%, #3d2352 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888;
+            --accent-primary: #ff9a9e;
+            --accent-secondary: #c44569;
+            --accent-light: #fecfef;
+            --border-color: rgba(255, 154, 158, 0.2);
+            --nav-bg: rgba(0, 0, 0, 0.3);
+            --nav-bg-scrolled: rgba(0, 0, 0, 0.8);
+            --particle-bg: linear-gradient(45deg, #ff6b9d, #c44569);
+        }
+
+        [data-theme="light"] {
+            /* Light mode colors */
+            --bg-primary: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #f3e8ff 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.8);
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --text-muted: #6b7280;
+            --accent-primary: #db2777;
+            --accent-secondary: #be185d;
+            --accent-light: #f9a8d4;
+            --border-color: rgba(219, 39, 119, 0.2);
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --nav-bg-scrolled: rgba(255, 255, 255, 0.95);
+            --particle-bg: linear-gradient(45deg, #ec4899, #db2777);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,10 +46,38 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #ffffff;
-            background: linear-gradient(135deg, #1a0f1a 0%, #2d1b3d 50%, #3d2352 100%);
+            color: var(--text-primary);
+            background: var(--bg-primary);
             min-height: 100vh;
             overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            z-index: 1002;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 154, 158, 0.4);
         }
 
         /* Animated background particles */
@@ -33,7 +93,7 @@
 
         .particle {
             position: absolute;
-            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            background: var(--particle-bg);
             border-radius: 50%;
             animation: float 6s ease-in-out infinite;
         }
@@ -50,14 +110,15 @@
             width: 100%;
             padding: 1rem 2rem;
             backdrop-filter: blur(10px);
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--nav-bg);
             z-index: 1000;
             transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
         }
 
         nav.scrolled {
-            background: rgba(0, 0, 0, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--nav-bg-scrolled);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .nav-container {
@@ -71,7 +132,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -84,7 +145,7 @@
         }
 
         .nav-links a {
-            color: #ffffff;
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -92,7 +153,7 @@
         }
 
         .nav-links a:hover {
-            color: #ff9a9e;
+            color: var(--accent-primary);
             transform: translateY(-2px);
         }
 
@@ -103,7 +164,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-light));
             transition: width 0.3s ease;
         }
 
@@ -130,7 +191,7 @@
             font-size: 4rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ffffff, #ff9a9e);
+            background: linear-gradient(45deg, var(--text-primary), var(--accent-primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -138,13 +199,13 @@
 
         .hero .subtitle {
             font-size: 1.5rem;
-            color: #b0b0b0;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
         }
 
         .hero .description {
             font-size: 1.2rem;
-            color: #888;
+            color: var(--text-muted);
             margin-bottom: 3rem;
             line-height: 1.8;
         }
@@ -169,7 +230,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, #ff9a9e, #c44569);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
             color: white;
         }
 
@@ -180,13 +241,13 @@
 
         .btn-secondary {
             background: transparent;
-            color: #ff9a9e;
-            border: 2px solid #ff9a9e;
+            color: var(--accent-primary);
+            border: 2px solid var(--accent-primary);
         }
 
         .btn-secondary:hover {
-            background: #ff9a9e;
-            color: #fff;
+            background: var(--accent-primary);
+            color: white;
             transform: translateY(-3px);
         }
 
@@ -202,7 +263,7 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 3rem;
-            background: linear-gradient(45deg, #ffffff, #ff9a9e);
+            background: linear-gradient(45deg, var(--text-primary), var(--accent-primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -217,11 +278,11 @@
         }
 
         .project-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--bg-secondary);
             border-radius: 25px;
             padding: 2rem;
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 154, 158, 0.2);
+            border: 1px solid var(--border-color);
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
@@ -235,7 +296,7 @@
             left: -100%;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #ff9a9e, transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
             transition: left 0.5s ease;
         }
 
@@ -246,7 +307,7 @@
         .project-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(255, 154, 158, 0.3);
-            border-color: #ff9a9e;
+            border-color: var(--accent-primary);
         }
 
         .project-header {
@@ -259,13 +320,13 @@
         .project-title {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #ffffff;
+            color: var(--text-primary);
         }
 
         .project-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(45deg, #ff9a9e, #c44569);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
             border-radius: 15px;
             display: flex;
             align-items: center;
@@ -276,7 +337,7 @@
         }
 
         .project-description {
-            color: #b0b0b0;
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
             line-height: 1.6;
         }
@@ -291,11 +352,11 @@
         .tech-tag {
             padding: 0.3rem 0.8rem;
             background: rgba(255, 154, 158, 0.2);
-            color: #fecfef;
+            color: var(--accent-light);
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
-            border: 1px solid rgba(255, 154, 158, 0.3);
+            border: 1px solid var(--border-color);
         }
 
         .project-links {
@@ -304,15 +365,97 @@
         }
 
         .project-link {
-            color: #ff9a9e;
+            color: var(--accent-primary);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
         }
 
         .project-link:hover {
-            color: #fecfef;
+            color: var(--accent-light);
             transform: translateX(5px);
+        }
+
+        /* Project Detail Page */
+        .project-detail {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .project-detail.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .project-detail-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .close-btn {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2001;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .project-detail h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-detail h2 {
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            color: var(--accent-primary);
+        }
+
+        .project-detail p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .project-image {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 1px solid var(--border-color);
         }
 
         /* Skills Section */
@@ -324,25 +467,25 @@
         }
 
         .skill-category {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--bg-secondary);
             border-radius: 25px;
             padding: 2rem;
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 154, 158, 0.2);
+            border: 1px solid var(--border-color);
             text-align: center;
             transition: all 0.3s ease;
         }
 
         .skill-category:hover {
             transform: translateY(-5px);
-            border-color: #ff9a9e;
+            border-color: var(--accent-primary);
             box-shadow: 0 10px 25px rgba(255, 154, 158, 0.2);
         }
 
         .skill-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(45deg, #ff9a9e, #c44569);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -356,11 +499,11 @@
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #ffffff;
+            color: var(--text-primary);
         }
 
         .skill-list {
-            color: #b0b0b0;
+            color: var(--text-secondary);
             line-height: 1.8;
         }
 
@@ -376,7 +519,7 @@
             width: 300px;
             height: 300px;
             border-radius: 30px;
-            background: linear-gradient(45deg, #ff9a9e, #c44569);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -387,45 +530,49 @@
         }
 
         .about-text {
-            color: #b0b0b0;
+            color: var(--text-secondary);
             font-size: 1.1rem;
             line-height: 1.8;
         }
 
         .about-text h3 {
-            color: #ffffff;
+            color: var(--text-primary);
             margin-bottom: 1rem;
             font-size: 1.3rem;
         }
 
-        /* Contact Section */
+        /* Contact Section - Fixed overflow issue */
         .contact-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
         .contact-item {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--bg-secondary);
             border-radius: 25px;
             padding: 2rem;
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 154, 158, 0.2);
+            border: 1px solid var(--border-color);
             text-align: center;
             transition: all 0.3s ease;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .contact-item:hover {
             transform: translateY(-5px);
-            border-color: #ff9a9e;
+            border-color: var(--accent-primary);
             box-shadow: 0 10px 25px rgba(255, 154, 158, 0.3);
         }
 
         .contact-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(45deg, #ff9a9e, #c44569);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -436,18 +583,24 @@
         }
 
         .contact-item h3 {
-            color: #ffffff;
-            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
         }
 
         .contact-item a {
-            color: #ff9a9e;
+            color: var(--accent-primary);
             text-decoration: none;
             transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            word-break: break-word;
+            line-height: 1.4;
         }
 
         .contact-item a:hover {
-            color: #fecfef;
+            color: var(--accent-light);
         }
 
         /* Animations */
@@ -504,6 +657,27 @@
             section {
                 padding: 3rem 1rem;
             }
+
+            .theme-toggle {
+                right: 1rem;
+                width: 45px;
+                height: 45px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .project-detail {
+                padding: 1rem;
+            }
+
+            .close-btn {
+                top: 1rem;
+                right: 1rem;
+                width: 45px;
+                height: 45px;
+            }
         }
 
         /* Scroll indicator */
@@ -519,13 +693,18 @@
 
         .scroll-progress {
             height: 100%;
-            background: linear-gradient(90deg, #ff9a9e, #c44569);
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
             width: 0%;
             transition: width 0.1s ease;
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+    </button>
+
     <!-- Scroll Progress Indicator -->
     <div class="scroll-indicator">
         <div class="scroll-progress" id="scrollProgress"></div>
@@ -569,17 +748,14 @@
     <section id="projects" class="fade-in">
         <h2 class="section-title">Featured Projects</h2>
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card" data-project="ascenda">
                 <div class="project-header">
                     <h3 class="project-title">Ascenda Hotel Booking Website</h3>
                     <div class="project-icon">🏩</div>
                 </div>
                 <p class="project-description">
-                    Full-stack hotel booking web application with user authentication, payment processing,and admin dashboard. 
-                    Group project involving industry partner company Ascenda. 
-                    Developed using MongoDB, Docker App, Node.js, React, CSS, and API handling with Ascenda's hotel service API. 
-                    Frontend tools utilised included Figma, CSS and React to ensure innovative design, creative styles and user interractivity. 
-                    This project required teamwork, git collaboration with feature branching and organisation, and functionality focus.  
+                    Full-stack hotel booking web application with user authentication, payment processing, and admin dashboard. 
+                    Group project involving industry partner company Ascenda.
                 </p>
                 <div class="tech-stack">
                     <span class="tech-tag">React</span>
@@ -588,84 +764,256 @@
                     <span class="tech-tag">Ascenda API</span>
                     <span class="tech-tag">Tailwind CSS</span>
                     <span class="tech-tag">Figma UI/UX</span>
-                  <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Docker</span>
                 </div>
                 <div class="project-links">
                     <a href="#" class="project-link">Live Demo →</a>
                     <a href="#" class="project-link">GitHub →</a>
+                    <a href="#" class="project-link view-details">View Details →</a>
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card" data-project="parceleye">
                 <div class="project-header">
                     <h3 class="project-title">ParcelEye: AI-Powered Parcel Tracking System</h3>
                     <div class="project-icon">📦</div>
                 </div>
                 <p class="project-description">
-                    ParcelEye is a cross-platform parcel tracking system developed to mitigate theft at unattended collection points. 
-                    Designed with modularity, real-time AI, and seamless mobile integration, the system uses computer vision 
-                    to track parcels and send immediate push notifications when packages become untraceable. 
-                    The application empowers users to monitor their parcels with high accuracy and reliability, 
-                    acting as a deterrent against crimes of opportunity.
-                    
-                    Features include Real-time AI tracking using Meta's SAM 2.1 model to detect parcel presence
-                    Push notifications via Firebase when parcels are lost or re-acquired in frame
-                    Secure user authentication with email verification and session token management 
-                    Live camera stream via HLS, protected with dynamic access control 
-                    Modular system architecture comprising Android App, Spring Boot API, and Flask-based AI server 
-                    Deployment ready using Docker containers and hosted on AWS
+                    ParcelEye is a cross-platform parcel tracking system developed to mitigate theft at unattended collection points using computer vision and real-time AI tracking.
                 </p>
                 <div class="tech-stack">
-                    <span class="tech-tag">Full-Stack Development (Python)</span>
-                    <span class="tech-tag">Android (Java/Kotlin)</span>
-                    <span class="tech-tag">Computer Vision (OpenCV)</span>
-                    <span class="tech-tag">Spring Boot (Java)</span>
-                    <span class="tech-tag">Firebase Cloud Messaging</span>
-                    <span class="tech-tag">Docker & Containerization</span>
-                    <span class="tech-tag">RESTful API Design</span>
-                    <span class="tech-tag">AI Integration (Meta SAM2.1)</span>
-                    <span class="tech-tag">MongoDB (NoSQL)</span>
-                    <span class="tech-tag">Cloud Deployment (AWS)</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Android</span>
+                    <span class="tech-tag">OpenCV</span>
+                    <span class="tech-tag">Spring Boot</span>
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">AWS</span>
+                    <span class="tech-tag">Meta SAM2.1</span>
                 </div>
                 <div class="project-links">
                     <a href="#" class="project-link">Demo →</a>
                     <a href="#" class="project-link">GitHub →</a>
+                    <a href="#" class="project-link view-details">View Details →</a>
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card" data-project="inquery">
                 <div class="project-header">
-                    <h3 class="project-title">InQuery </h3>
+                    <h3 class="project-title">InQuery</h3>
                     <div class="project-icon">📚</div>
                 </div>
                 <p class="project-description">
-                    InQuery is a web-based platform developed as part of the Undergraduate Research Opportunities Programme (UROP) at SUTD. 
-                    The project explores how live interactive querying—powered by Large Language Models (LLMs) like GPT-4, 
-                    can support and enhance learning in classroom environments.
-
-                    By integrating real-time transcription of lectures with GPT-4, 
-                    InQuery allows students to engage directly with lecture content by asking clarifying questions, 
-                    receiving context-aware explanations, and improving note-taking in real time. 
-                    The system is built using Flask for both the front-end and back-end, with a responsive UI 
-                    built using HTML, CSS, JavaScript, and Twitter Bootstrap. The result is an intelligent, 
-                    interactive educational tool designed to foster deeper understanding and more active classroom participation.
+                    InQuery is a web-based platform developed as part of UROP at SUTD, exploring how live interactive querying powered by LLMs can enhance learning in classroom environments.
                 </p>
                 <div class="tech-stack">
-                    <span class="tech-tag">Flask (Python)</span>
+                    <span class="tech-tag">Flask</span>
                     <span class="tech-tag">HTML</span>
                     <span class="tech-tag">CSS</span>
                     <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Twitter Bootstrap</span>
-                    <span class="tech-tag">GPT-4 via OpenAI API</span>
-                    <span class="tech-tag">RESTful API</span>
+                    <span class="tech-tag">Bootstrap</span>
+                    <span class="tech-tag">GPT-4</span>
+                    <span class="tech-tag">OpenAI API</span>
                 </div>
                 <div class="project-links">
                     <a href="#" class="project-link">Demo →</a>
                     <a href="#" class="project-link">GitHub →</a>
+                    <a href="#" class="project-link view-details">View Details →</a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Project Detail Pages -->
+    <div id="project-ascenda" class="project-detail">
+        <button class="close-btn" onclick="closeProjectDetail()">&times;</button>
+        <div class="project-detail-content">
+            <h1>Ascenda Hotel Booking Website</h1>
+            
+            <div class="project-gallery">
+                <div class="project-image">🏨</div>
+                <div class="project-image">💳</div>
+                <div class="project-image">📊</div>
+                <div class="project-image">🔐</div>
+            </div>
+
+            <h2>Project Overview</h2>
+            <p>
+                The Ascenda Hotel Booking Website is a comprehensive full-stack web application developed in collaboration with Ascenda, 
+                a leading technology company in the travel industry. This project showcases modern web development practices, 
+                user-centered design, and seamless API integration.
+            </p>
+
+            <h2>Key Features</h2>
+            <p>
+                <strong>User Authentication:</strong> Secure login and registration system with JWT tokens and session management.
+                <br><br>
+                <strong>Hotel Search & Booking:</strong> Advanced search functionality with filters for location, price, amenities, and dates.
+                <br><br>
+                <strong>Payment Processing:</strong> Integrated payment gateway for secure transactions and booking confirmations.
+                <br><br>
+                <strong>Admin Dashboard:</strong> Comprehensive management interface for hotel administrators to manage bookings, inventory, and analytics.
+                <br><br>
+                <strong>Responsive Design:</strong> Mobile-first design approach ensuring optimal experience across all devices.
+            </p>
+
+            <h2>Technical Implementation</h2>
+            <p>
+                Built using React for the frontend with modern hooks and context API for state management. The backend leverages Node.js 
+                with Express framework, connecting to MongoDB for data persistence. Docker containerization ensures consistent 
+                deployment across environments, while Tailwind CSS provides utility-first styling approach.
+            </p>
+
+            <h2>Team Collaboration</h2>
+            <p>
+                This project emphasized collaborative development using Git feature branching, code reviews, and agile methodologies. 
+                Regular standups and sprint planning sessions ensured efficient progress and quality deliverables. 
+                UI/UX design was prototyped using Figma with iterative feedback from stakeholders.
+            </p>
+
+            <h2>Challenges & Solutions</h2>
+            <p>
+                One major challenge was integrating Ascenda's complex hotel service API while maintaining fast response times. 
+                We implemented caching strategies and optimized API calls to ensure smooth user experience. 
+                Another challenge was handling concurrent booking requests, which we solved using database transactions and proper error handling.
+            </p>
+        </div>
+    </div>
+
+    <div id="project-parceleye" class="project-detail">
+        <button class="close-btn" onclick="closeProjectDetail()">&times;</button>
+        <div class="project-detail-content">
+            <h1>ParcelEye: AI-Powered Parcel Tracking System</h1>
+            
+            <div class="project-gallery">
+                <div class="project-image">📱</div>
+                <div class="project-image">🤖</div>
+                <div class="project-image">🔔</div>
+                <div class="project-image">☁️</div>
+            </div>
+
+            <h2>Project Overview</h2>
+            <p>
+                ParcelEye addresses the growing problem of parcel theft at unattended collection points through innovative AI-powered surveillance. 
+                The system combines computer vision, real-time processing, and mobile notifications to create a comprehensive security solution 
+                that acts as both a deterrent and early warning system.
+            </p>
+
+            <h2>AI & Computer Vision</h2>
+            <p>
+                <strong>Meta SAM 2.1 Integration:</strong> Utilizes the latest Segment Anything Model for precise object detection and tracking.
+                <br><br>
+                <strong>Real-time Processing:</strong> OpenCV-based pipeline processes video streams with minimal latency for immediate threat detection.
+                <br><br>
+                <strong>Adaptive Learning:</strong> The system learns parcel characteristics and improves accuracy over time through continuous monitoring.
+                <br><br>
+                <strong>Environmental Adaptation:</strong> Robust performance across different lighting conditions and weather scenarios.
+            </p>
+
+            <h2>System Architecture</h2>
+            <p>
+                The modular architecture consists of three main components: an Android mobile application for user interaction, 
+                a Spring Boot API server for business logic and authentication, and a Flask-based AI server for computer vision processing. 
+                This separation ensures scalability and maintainability while allowing for independent deployment and updates.
+            </p>
+
+            <h2>Mobile Application Features</h2>
+            <p>
+                <strong>Real-time Notifications:</strong> Instant push notifications via Firebase Cloud Messaging when parcels are detected as missing.
+                <br><br>
+                <strong>Live Camera Feed:</strong> Secure HLS streaming with dynamic access control for remote monitoring.
+                <br><br>
+                <strong>User Authentication:</strong> Robust security with email verification and session token management.
+                <br><br>
+                <strong>Intuitive Interface:</strong> Clean, user-friendly design focused on essential functionality and quick access to alerts.
+            </p>
+
+            <h2>Cloud Infrastructure</h2>
+            <p>
+                Deployed on AWS with Docker containerization for consistent performance and easy scaling. 
+                The system handles multiple concurrent video streams while maintaining low latency for real-time alerts. 
+                MongoDB provides flexible data storage for user information, device configurations, and tracking history.
+            </p>
+
+            <h2>Impact & Results</h2>
+            <p>
+                ParcelEye demonstrates the practical application of AI in solving real-world security challenges. 
+                The system's modular design makes it easily adaptable to different environments and scalable for commercial deployment. 
+                Testing showed high accuracy in parcel detection with minimal false positives, making it a viable solution for reducing package theft.
+            </p>
+        </div>
+    </div>
+
+    <div id="project-inquery" class="project-detail">
+        <button class="close-btn" onclick="closeProjectDetail()">&times;</button>
+        <div class="project-detail-content">
+            <h1>InQuery: Interactive Learning Platform</h1>
+            
+            <div class="project-gallery">
+                <div class="project-image">🎓</div>
+                <div class="project-image">💬</div>
+                <div class="project-image">📝</div>
+                <div class="project-image">🧠</div>
+            </div>
+
+            <h2>Project Overview</h2>
+            <p>
+                InQuery is a groundbreaking research project developed under the Undergraduate Research Opportunities Programme (UROP) at SUTD. 
+                The platform explores how Large Language Models can revolutionize classroom learning through real-time, context-aware interactions 
+                that enhance student engagement and comprehension.
+            </p>
+
+            <h2>Research Objectives</h2>
+            <p>
+                <strong>Educational Enhancement:</strong> Investigate how AI-powered tools can supplement traditional teaching methods.
+                <br><br>
+                <strong>Real-time Interaction:</strong> Enable students to ask clarifying questions during lectures without disrupting the flow.
+                <br><br>
+                <strong>Context Awareness:</strong> Provide answers that are specifically relevant to the current lecture content and context.
+                <br><br>
+                <strong>Learning Analytics:</strong> Collect data on student engagement patterns and common areas of confusion.
+            </p>
+
+            <h2>Technical Implementation</h2>
+            <p>
+                The platform is built using Flask as both the web framework and API backend, providing a lightweight yet powerful foundation. 
+                The frontend combines HTML5, CSS3, and JavaScript with Twitter Bootstrap for responsive design and intuitive user interactions. 
+                GPT-4 integration via OpenAI's API enables sophisticated natural language processing and contextual responses.
+            </p>
+
+            <h2>Key Features</h2>
+            <p>
+                <strong>Live Transcription:</strong> Real-time conversion of lecture audio to text for context-aware question answering.
+                <br><br>
+                <strong>Intelligent Q&A:</strong> Students can ask questions that are answered based on current lecture content and broader educational context.
+                <br><br>
+                <strong>Note-taking Enhancement:</strong> Automatic generation of key points and summaries to support student note-taking.
+                <br><br>
+                <strong>Interactive Interface:</strong> Clean, distraction-free design that integrates seamlessly into the classroom environment.
+            </p>
+
+            <h2>Educational Impact</h2>
+            <p>
+                InQuery addresses common classroom challenges such as students hesitating to ask questions publicly, 
+                difficulty keeping up with fast-paced lectures, and varying levels of background knowledge among students. 
+                By providing a private, AI-powered assistant, students can get immediate clarification without interrupting the class flow.
+            </p>
+
+            <h2>Research Outcomes</h2>
+            <p>
+                The project demonstrates the potential for AI to enhance educational experiences without replacing human instruction. 
+                Initial testing showed improved student engagement and better comprehension of complex topics. 
+                The research contributes to the growing field of AI in education and provides insights for future educational technology development.
+            </p>
+
+            <h2>Future Development</h2>
+            <p>
+                Future iterations could include multilingual support, integration with learning management systems, 
+                and advanced analytics for educators to identify common knowledge gaps. 
+                The platform's modular design allows for easy expansion and adaptation to different educational contexts.
+            </p>
+        </div>
+    </div>
 
     <!-- Skills Section -->
     <section id="skills" class="fade-in">
@@ -752,32 +1100,92 @@
             <div class="contact-item">
                 <div class="contact-icon">💌</div>
                 <h3>Email</h3>
-                <a href="mailto:your.email@example.com">shalash.linda@gmail.com</a>
-                <a href="mailto:your.email@example.com">lindaemilia_shalash@mymail.sutd.edu.sg</a>
+                <a href="mailto:shalash.linda@gmail.com">shalash.linda@gmail.com</a>
+                <a href="mailto:lindaemilia_shalash@mymail.sutd.edu.sg">lindaemilia_shalash@mymail.sutd.edu.sg</a>
             </div>
 
             <div class="contact-item">
                 <div class="contact-icon">🌷</div>
                 <h3>LinkedIn</h3>
-                <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/linda-emilia-shalash/</a>
+                <a href="https://linkedin.com/in/linda-emilia-shalash/" target="_blank">linkedin.com/in/linda-emilia-shalash/</a>
             </div>
 
             <div class="contact-item">
                 <div class="contact-icon">🦋</div>
                 <h3>GitHub</h3>
-                <a href="https://github.com/yourusername" target="_blank">github.com/lindashalash</a>
+                <a href="https://github.com/lindashalash" target="_blank">github.com/lindashalash</a>
             </div>
 
             <div class="contact-item">
                 <div class="contact-icon">🌙</div>
                 <h3>Phone</h3>
-                <a href="tel:+1234567890">+65 8269 5569</a>
-                <a href="tel:+1234567890">+41 (0)79 875 54 33</a>
+                <a href="tel:+6582695569">+65 8269 5569</a>
+                <a href="tel:+41798755433">+41 (0)79 875 54 33</a>
             </div>
         </div>
     </section>
 
     <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Load saved theme or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+            
+            // Recreate particles with new theme colors
+            setTimeout(createParticles, 100);
+        });
+        
+        function updateThemeIcon(theme) {
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Project Detail Functionality
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Don't open detail if clicking on a link
+                if (e.target.classList.contains('project-link')) {
+                    return;
+                }
+                
+                const projectId = card.getAttribute('data-project');
+                openProjectDetail(projectId);
+            });
+        });
+
+        function openProjectDetail(projectId) {
+            const detailPage = document.getElementById(`project-${projectId}`);
+            if (detailPage) {
+                detailPage.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeProjectDetail() {
+            document.querySelectorAll('.project-detail').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close project detail with escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeProjectDetail();
+            }
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -828,6 +1236,9 @@
         // Create animated background particles
         function createParticles() {
             const bgAnimation = document.getElementById('bgAnimation');
+            // Clear existing particles
+            bgAnimation.innerHTML = '';
+            
             const particleCount = 20;
 
             for (let i = 0; i < particleCount; i++) {
@@ -865,7 +1276,7 @@
             });
         });
 
-        // Add typing effect to hero subtitle (optional enhancement)
+        // Add typing effect to hero subtitle
         function typeWriter(element, text, speed = 100) {
             let i = 0;
             element.innerHTML = '';
