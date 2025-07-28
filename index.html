@@ -528,6 +528,8 @@
             color: white;
             margin: 0 auto;
             box-shadow: 0 10px 30px rgba(255, 154, 158, 0.3);
+            padding: 8px; 
+            overflow: hidden; 
         }
 
         .about-text {
@@ -697,6 +699,25 @@
             background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
             width: 0%;
             transition: width 0.1s ease;
+        }
+        /* Profile Photo styling: circular + animations */
+        .about-image.circular {
+            border-radius: 50%; /* Makes it circular */
+            padding: 6px;
+        }
+
+        .about-image.circular .profile-photo {
+            border-radius: 50%;
+        }
+
+        .about-image.circular:hover {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 30px rgba(255, 154, 158, 0.3); }
+            50% { box-shadow: 0 15px 40px rgba(255, 154, 158, 0.6); }
+            100% { box-shadow: 0 10px 30px rgba(255, 154, 158, 0.3); }
         }
     </style>
 </head>
@@ -1068,7 +1089,9 @@
     <section id="about" class="fade-in">
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
-            <div class="about-image">🌺</div>
+            <div class="about-image circular">
+                <img src="./images/linda-profile.jpg" alt="Linda Emilia Shalash" class="profile-photo">
+            </div>
             <div class="about-text">
                <h3>Hello! I'm a passionate Computer Science and Design student</h3>
                   <p>
