@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio showcasing my computer science projects and skills.
 
-🌐 **Live Site**: https://your-username.github.io/portfolio
+🌐 **Live Site**: https://lindashalash.github.io/portfolio
 
 ## Technologies Used
 - HTML5
