@@ -732,6 +732,182 @@
         .profile-photo:hover {
             transform: scale(1.05);
         }
+        
+        /* Achievements Section */
+        .achievements-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .achievement-item {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 154, 158, 0.3);
+            border-color: var(--accent-primary);
+        }
+
+        .achievement-item:hover::before {
+            left: 100%;
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .achievement-date {
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Personal Section */
+        .personal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .personal-item {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .personal-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 25px rgba(255, 154, 158, 0.2);
+        }
+
+        .personal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .personal-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .personal-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Interests Section */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .interest-card {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .interest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 154, 158, 0.3);
+            border-color: var(--accent-primary);
+        }
+
+        .interest-card:hover::before {
+            left: 100%;
+        }
+
+        .interest-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .interest-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .interest-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Mobile responsiveness for new sections */
+        @media (max-width: 768px) {
+            .achievements-container,
+            .personal-grid,
+            .interests-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .achievement-item,
+            .personal-item,
+            .interest-card {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -757,6 +933,9 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#achievements">Skills</a></li>
+                <li><a href="#personal">Skills</a></li>
+                <li><a href="#interests">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -1130,6 +1309,143 @@
                         challenging problems, collaborate with diverse teams, and continue growing as a developer and researcher.
                     </p>
 
+            </div>
+        </div>
+    </section>
+    <!-- Achievements Section -->
+    <section id="achievements" class="fade-in">
+        <h2 class="section-title">Achievements</h2>
+        <div class="achievements-container">
+            <div class="achievement-item">
+                <div class="achievement-icon">📜</div>
+                <h3>SUTD Undergraduate Merit Scholarship</h3>
+                <p class="achievement-date">2023-2027</p>
+                <p class="achievement-description">Recognized by SUTD for outstanding performance in academics in International Baccalaureate Programme.</p>
+            </div>
+            
+            <div class="achievement-item">
+                <div class="achievement-icon">🇰🇷</div>
+                <h3>KAIST Global Exchange Recipient</h3>
+                <p class="achievement-date">2025</p>
+                <p class="achievement-description">Selected to participate in an exchange programme in Korea's best engineering college: KAIST, competing for one of 4 slots for the programme. Granted this opportunity with good academic record, outstanding extracurricular Visual Arts Leadership, and community engagement at SUTD.</p>
+            </div>
+            
+            <div class="achievement-item">
+                <div class="achievement-icon">🔬</div>
+                <h3>Undergraduate Research Opportunity Programme Certification</h3>
+                <p class="achievement-date">2024</p>
+                <p class="achievement-description">Received university certification for active participation in InQuery undergraduate research Project over the course of 2 semesters.</p>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-icon">👩🏻‍🏫</div>
+                <h3>Undergraduate Teaching Opportunity Programme Certification</h3>
+                <p class="achievement-date">2024</p>
+                <p class="achievement-description">Received university certification for assistant teaching for Modelling and Analysis Mathematics course at SUTD. </p>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-icon">👩🏻‍🏫</div>
+                <h3>CITI Social & Behavioural Education Certification</h3>
+                <p class="achievement-date">2024</p>
+                <p class="achievement-description">To facilitate Human-Computer Interraction research in my InQuery research project, completed a researcher CITI course and received certification to conduct experimental research.</p>
+            </div>
+
+            <div class="achievement-item">
+                <div class="achievement-icon">👩🏻‍🏫</div>
+                <h3>Responsive Web Design Developer Certification</h3>
+                <p class="achievement-date">2023</p>
+                <p class="achievement-description">Completed a responsive web design online certification where key skills learned were HTML, CSS, and JavaScript programming to create interractivity in web development.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Personal Section -->
+    <section id="personal" class="fade-in">
+        <h2 class="section-title">Personal Life</h2>
+        <div class="personal-content">
+            <div class="personal-grid">
+                <div class="personal-item">
+                    <div class="personal-icon">✈️</div>
+                    <h3>Travel & Culture</h3>
+                    <p>Born in Switzerland, currently studying in Singapore. I love exploring different cultures and have lived in multiple countries.</p>
+                </div>
+                
+                <div class="personal-item">
+                    <div class="personal-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family</h3>
+                    <p>Family is incredibly important to me. I maintain strong connections with loved ones across continents.</p>
+                </div>
+                
+                <div class="personal-item">
+                    <div class="personal-icon">🌱</div>
+                    <h3>Growth Mindset</h3>
+                    <p>I believe in continuous learning and personal development, both in technology and in life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section id="interests" class="fade-in">
+        <h2 class="section-title">Interests & Hobbies</h2>
+        <div class="interests-grid">
+            <div class="interest-card">
+                <div class="interest-icon">🎨</div>
+                <h3>Digital Art & Design</h3>
+                <p>Passionate about UI/UX design and digital illustration. 
+                    My passion for UI/UX and design originated from my deep interest 
+                    for Visual arts and digital art in specific. 
+                    I have more than 10 years of visual arts experience which has 
+                    developed my creativity, innovation, and graphic design abilities.
+                </p>
+
+                <p>I was elected President of SUTD's Visual Arts Club (VAC) in my 
+                    first year and sustained the role well into my second year. 
+                    Since then, I have taken on the role of Vice President to 
+                    continue supporting the club in my third year.
+                </p>
+
+            </div>
+            
+            <div class="interest-card">
+                <div class="interest-icon">🎓</div>
+                <h3>SUTD University Ambassadors Club</h3>
+                <p>As an international student at SUTD, I have always wanted to ensure that 
+                    any incoming or prospective students are given the opportunity to appreciate 
+                    the university and experience the opportunities that SUTD offers with its 
+                    unique curriculum structure. 
+                </p>    
+                <p>More specifically, I find it important that 
+                    incoming students are supported and guided through these new university 
+                    experiences and that they do not feel alone in their student journey at SUTD. 
+                    I value creating connections and supporting fellow students in bringing forth a better community.</p>
+            </div>
+            
+            <div class="interest-card">
+                <div class="interest-icon">⛑️</div>
+                <h3>Volunteer: Roundsquare Aid Club, Zurich</h3>
+                <p>Led the finance team for my secondary school's volunteer club that was 
+                    collaborating with international Aid organisation Roundsquare based in London. 
+                    Additionally, actively contributed to the Events planning committee, 
+                    building on my teamworking, management and communication skills.</p>
+            </div>
+            
+            <div class="interest-card">
+                <div class="interest-icon">🏐</div>
+                <h3>Fitness & Varsity Volleyball</h3>
+                <p>Active member of Volleyball team from 2018 to 2023, climbing up to Varsity Team Captain 
+                    in my last 2 years. On top of building a community and memories, 
+                    these years taught me essential skills in collaboration, playing to everyones strengths, 
+                    discerning team goals from personal ambitions, and collaborating with different people.
+                </p>
+                
+                    <p>Outside of team sports, I have a strong interest in personal health and growth, 
+                    committing to weightlifting 4 times a week. This interest has not only made me 
+                    resillient and persistent, it has taught me patience, confidence and most 
+                    importantly made me a consistent and dilligent goal-oriented individual.
+                </p>
             </div>
         </div>
     </section>
