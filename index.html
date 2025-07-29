@@ -739,15 +739,24 @@
             flex-direction: column;
             gap: 2rem;
             margin-top: 3rem;
-            max-width: 800px; /* Optional: limit width for better readability */
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .achievement-item {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            padding: 2.5rem;
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Align content to the left */
+            align-items: center; /* Center everything */
         }
 
         .achievement-item::before {
@@ -772,7 +781,8 @@
         }
 
         .achievement-icon {
-            align-self: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
         .achievement-item h3 {
@@ -792,72 +802,31 @@
             line-height: 1.6;
         }
 
-        /* Personal Section */
-        .personal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .personal-item {
-            background: var(--bg-secondary);
-            border-radius: 25px;
-            padding: 2rem;
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border-color);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .personal-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
-            box-shadow: 0 10px 25px rgba(255, 154, 158, 0.2);
-        }
-
-        .personal-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .personal-item h3 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .personal-item p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Interests Section - Vertical Layout */
+        /* Interests Section - COMPLETE CORRECTED VERSION */
         .interests-grid {
             display: flex;
             flex-direction: column;
             gap: 2rem;
             margin-top: 3rem;
-            max-width: 800px; /* Optional: limit width for better readability */
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-        }
-        
-        /* Center the icons while keeping text left-aligned */
-        .interest-icon {
-            align-self: center;
         }
 
         .interest-card {
             background: var(--bg-secondary);
             border-radius: 25px;
-            padding: 2rem;
+            padding: 2.5rem;
             backdrop-filter: blur(15px);
             border: 1px solid var(--border-color);
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center everything */
         }
 
         .interest-card::before {
@@ -881,12 +850,11 @@
             left: 100%;
         }
 
-        .interest-card {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Align content to the left */
+        .interest-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
-        
+
         .interest-card h3 {
             color: var(--text-primary);
             margin-bottom: 1rem;
@@ -896,12 +864,15 @@
         .interest-card p {
             color: var(--text-secondary);
             line-height: 1.6;
+            margin-bottom: 1rem;
         }
+
         /* Interest Link Styling */
         .interest-link {
             margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 1px solid var(--border-color);
+            width: 100%;
         }
 
         .view-details {
