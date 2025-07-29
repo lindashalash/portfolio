@@ -802,13 +802,13 @@
             line-height: 1.6;
         }
 
-        /* Interests Section - COMPLETE CORRECTED VERSION */
+        /* Interests Section - New Layout with Images */
         .interests-grid {
             display: flex;
             flex-direction: column;
             gap: 2rem;
             margin-top: 3rem;
-            max-width: 800px;
+            max-width: 1000px; /* Slightly wider to accommodate image + text */
             margin-left: auto;
             margin-right: auto;
         }
@@ -816,17 +816,16 @@
         .interest-card {
             background: var(--bg-secondary);
             border-radius: 25px;
-            padding: 2.5rem;
+            padding: 2rem;
             backdrop-filter: blur(15px);
             border: 1px solid var(--border-color);
-            text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center everything */
+            display: flex; /* Change to flex for side-by-side layout */
+            align-items: flex-start;
+            gap: 2rem; /* Space between image and content */
         }
 
         .interest-card::before {
@@ -850,29 +849,72 @@
             left: 100%;
         }
 
-        .interest-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        /* Image Section */
+        .interest-image {
+            flex-shrink: 0; /* Prevent image from shrinking */
+            width: 200px;
+            height: 150px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
         }
 
-        .interest-card h3 {
+        .interest-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .interest-photo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Placeholder styling if you don't have images yet */
+        .interest-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            border-radius: 15px;
+        }
+
+        /* Content Section */
+        .interest-content {
+            flex: 1; /* Take up remaining space */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .interest-content h3 {
             color: var(--text-primary);
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem; /* Space between icon and text */
         }
 
-        .interest-card p {
+        .title-icon {
+            font-size: 1.2rem; /* Slightly smaller than before */
+        }
+
+        .interest-content p {
             color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 1rem;
+            text-align: left; /* Left-align text for better readability */
         }
 
         /* Interest Link Styling */
         .interest-link {
-            margin-top: 1.5rem;
+            margin-top: auto; /* Push to bottom of content area */
             padding-top: 1rem;
             border-top: 1px solid var(--border-color);
-            width: 100%;
         }
 
         .view-details {
@@ -892,19 +934,26 @@
             color: var(--accent-light);
         }
 
-        /* Mobile responsiveness for new sections */
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .achievements-container,
-            .personal-grid,
-            .interests-grid {
-                grid-template-columns: 1fr;
+            .interest-card {
+                flex-direction: column; /* Stack vertically on mobile */
                 gap: 1.5rem;
+                text-align: center;
             }
             
-            .achievement-item,
-            .personal-item,
-            .interest-card {
-                padding: 1.5rem;
+            .interest-image {
+                width: 100%;
+                height: 200px;
+                margin: 0 auto;
+            }
+            
+            .interest-content h3 {
+                justify-content: center; /* Center title on mobile */
+            }
+            
+            .interest-content p {
+                text-align: center; /* Center text on mobile */
             }
         }
     </style>
@@ -1029,7 +1078,6 @@
                     <span class="tech-tag">OpenAI API</span>
                 </div>
                 <div class="project-links">
-                    <a href="#" class="project-link">Demo →</a>
                     <a href="#" class="project-link">GitHub →</a>
                     <a href="#" class="project-link view-details">View Details →</a>
                 </div>
