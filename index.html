@@ -57,9 +57,9 @@
         /* Theme Toggle Button */
         .theme-toggle {
             position: fixed;
-            top: 50%;
+            bottom: 2rem;  /* Changed from top: 50% */
             right: 2rem;
-            transform: translateY(-50%);
+            transform: none;  /* Removed the centering transform */
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -77,7 +77,7 @@
         }
 
         .theme-toggle:hover {
-            transform: translateY(-50%) scale(1.1);
+            transform: scale(1.1);  /* Removed translateY, kept only scale */
             box-shadow: 0 6px 20px rgba(255, 154, 158, 0.4);
         }
 
@@ -733,24 +733,21 @@
             transform: scale(1.05);
         }
         
-        /* Achievements Section */
+        /* Achievements Section - Vertical Layout */
         .achievements-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
             margin-top: 3rem;
+            max-width: 800px; /* Optional: limit width for better readability */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .achievement-item {
-            background: var(--bg-secondary);
-            border-radius: 25px;
-            padding: 2rem;
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border-color);
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align content to the left */
         }
 
         .achievement-item::before {
@@ -775,8 +772,7 @@
         }
 
         .achievement-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            align-self: center;
         }
 
         .achievement-item h3 {
@@ -836,12 +832,20 @@
             line-height: 1.6;
         }
 
-        /* Interests Section */
+        /* Interests Section - Vertical Layout */
         .interests-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
             margin-top: 3rem;
+            max-width: 800px; /* Optional: limit width for better readability */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Center the icons while keeping text left-aligned */
+        .interest-icon {
+            align-self: center;
         }
 
         .interest-card {
@@ -877,11 +881,12 @@
             left: 100%;
         }
 
-        .interest-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .interest-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align content to the left */
         }
-
+        
         .interest-card h3 {
             color: var(--text-primary);
             margin-bottom: 1rem;
@@ -891,6 +896,29 @@
         .interest-card p {
             color: var(--text-secondary);
             line-height: 1.6;
+        }
+        /* Interest Link Styling */
+        .interest-link {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .view-details {
+            color: var(--accent-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .view-details:hover {
+            color: var(--accent-light);
+            transform: translateX(5px);
+        }
+
+        .interest-card:hover .view-details {
+            color: var(--accent-light);
         }
 
         /* Mobile responsiveness for new sections */
@@ -933,9 +961,9 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#achievements">Skills</a></li>
-                <li><a href="#personal">Skills</a></li>
-                <li><a href="#interests">Skills</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#personal">Personal</a></li>
+                <li><a href="#interests">Interests</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -1312,6 +1340,7 @@
             </div>
         </div>
     </section>
+
     <!-- Achievements Section -->
     <section id="achievements" class="fade-in">
         <h2 class="section-title">Achievements</h2>
@@ -1391,7 +1420,7 @@
     <section id="interests" class="fade-in">
         <h2 class="section-title">Interests & Hobbies</h2>
         <div class="interests-grid">
-            <div class="interest-card">
+            <div class="interest-card" data-interest="digital-art">
                 <div class="interest-icon">🎨</div>
                 <h3>Digital Art & Design</h3>
                 <p>Passionate about UI/UX design and digital illustration. 
@@ -1400,16 +1429,17 @@
                     I have more than 10 years of visual arts experience which has 
                     developed my creativity, innovation, and graphic design abilities.
                 </p>
-
                 <p>I was elected President of SUTD's Visual Arts Club (VAC) in my 
                     first year and sustained the role well into my second year. 
                     Since then, I have taken on the role of Vice President to 
                     continue supporting the club in my third year.
                 </p>
-
+                <div class="interest-link">
+                    <span class="view-details">View Details →</span>
+                </div>
             </div>
             
-            <div class="interest-card">
+            <div class="interest-card" data-interest="ambassadors">
                 <div class="interest-icon">🎓</div>
                 <h3>SUTD University Ambassadors Club</h3>
                 <p>As an international student at SUTD, I have always wanted to ensure that 
@@ -1420,19 +1450,27 @@
                 <p>More specifically, I find it important that 
                     incoming students are supported and guided through these new university 
                     experiences and that they do not feel alone in their student journey at SUTD. 
-                    I value creating connections and supporting fellow students in bringing forth a better community.</p>
+                    I value creating connections and supporting fellow students in bringing forth a better community.
+                </p>
+                <div class="interest-link">
+                    <span class="view-details">View Details →</span>
+                </div>
             </div>
             
-            <div class="interest-card">
+            <div class="interest-card" data-interest="volunteer">
                 <div class="interest-icon">⛑️</div>
                 <h3>Volunteer: Roundsquare Aid Club, Zurich</h3>
                 <p>Led the finance team for my secondary school's volunteer club that was 
                     collaborating with international Aid organisation Roundsquare based in London. 
                     Additionally, actively contributed to the Events planning committee, 
-                    building on my teamworking, management and communication skills.</p>
+                    building on my teamworking, management and communication skills.
+                </p>
+                <div class="interest-link">
+                    <span class="view-details">View Details →</span>
+                </div>
             </div>
             
-            <div class="interest-card">
+            <div class="interest-card" data-interest="fitness">
                 <div class="interest-icon">🏐</div>
                 <h3>Fitness & Varsity Volleyball</h3>
                 <p>Active member of Volleyball team from 2018 to 2023, climbing up to Varsity Team Captain 
@@ -1440,15 +1478,256 @@
                     these years taught me essential skills in collaboration, playing to everyones strengths, 
                     discerning team goals from personal ambitions, and collaborating with different people.
                 </p>
-                
-                    <p>Outside of team sports, I have a strong interest in personal health and growth, 
+                <p>Outside of team sports, I have a strong interest in personal health and growth, 
                     committing to weightlifting 4 times a week. This interest has not only made me 
                     resillient and persistent, it has taught me patience, confidence and most 
                     importantly made me a consistent and dilligent goal-oriented individual.
                 </p>
+                <div class="interest-link">
+                    <span class="view-details">View Details →</span>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Interest Detail Pages -->
+    <div id="interest-digital-art" class="project-detail">
+        <button class="close-btn" onclick="closeInterestDetail()">&times;</button>
+        <div class="project-detail-content">
+            <h1>🎨 Digital Art & Design</h1>
+            
+            <div class="project-gallery">
+                <div class="project-image">🖌️</div>
+                <div class="project-image">🎨</div>
+                <div class="project-image">📐</div>
+                <div class="project-image">💡</div>
+            </div>
+
+            <h2>My Creative Journey</h2>
+            <p>
+                My passion for UI/UX and design stems from over 10 years of experience in visual arts and digital illustration. 
+                This creative foundation has shaped my approach to technology, allowing me to bridge the gap between 
+                aesthetic appeal and functional design in my software development projects.
+            </p>
+
+            <h2>Leadership in Visual Arts</h2>
+            <p>
+                <strong>SUTD Visual Arts Club President (Year 1-2):</strong> I was elected President of SUTD's Visual Arts Club during my first year, 
+                a role I maintained throughout my second year. This leadership position allowed me to organize creative workshops, 
+                coordinate art exhibitions, and build a vibrant community of artists within the university.
+            </p>
+            <p>
+                <strong>Vice President (Year 3):</strong> Transitioning to Vice President in my third year, I continue to support the club's mission 
+                while balancing increased academic responsibilities. This experience has taught me valuable skills in team management, 
+                event coordination, and creative project leadership.
+            </p>
+
+            <h2>Skills & Techniques</h2>
+            <p>
+                Through my decade-long journey in visual arts, I've developed expertise in various digital art techniques, 
+                color theory, composition, and design principles. These skills directly influence my approach to UI/UX design, 
+                helping me create intuitive and visually appealing user interfaces in my technical projects.
+            </p>
+
+            <h2>Integration with Technology</h2>
+            <p>
+                My artistic background uniquely positions me in the tech industry, where I can contribute both technical skills 
+                and creative vision. This combination is evident in projects like my portfolio website and the user interfaces 
+                I've designed for applications like ParcelEye and InQuery.
+            </p>
+        </div>
+    </div>
+
+    <div id="interest-ambassadors" class="project-detail">
+        <button class="close-btn" onclick="closeInterestDetail()">&times;</button>
+        <div class="project-detail-content">
+            <h1>🎓 SUTD University Ambassadors</h1>
+            
+            <div class="project-gallery">
+                <div class="project-image">🌍</div>
+                <div class="project-image">🤝</div>
+                <div class="project-image">📚</div>
+                <div class="project-image">💬</div>
+            </div>
+
+            <h2>Mission & Purpose</h2>
+            <p>
+                As an international student at SUTD, I understand firsthand the challenges of adapting to a new educational system 
+                and cultural environment. This personal experience drives my commitment to ensuring that incoming and prospective 
+                students receive the support and guidance they need to thrive at SUTD.
+            </p>
+
+            <h2>Supporting Student Success</h2>
+            <p>
+                <strong>Prospective Student Engagement:</strong> I work directly with prospective students and their families, 
+                sharing insights about SUTD's unique curriculum structure, campus life, and the opportunities available. 
+                This includes participating in university fairs, hosting campus tours, and conducting information sessions.
+            </p>
+            <p>
+                <strong>New Student Integration:</strong> I focus particularly on helping new students navigate their initial 
+                university experiences, ensuring they don't feel alone in their academic journey. This involves mentoring 
+                programs, social events, and academic support initiatives.
+            </p>
+
+            <h2>Building Community</h2>
+            <p>
+                One of my core values is creating meaningful connections within the university community. Through my role as 
+                a University Ambassador, I've helped organize events that bring together students from diverse backgrounds, 
+                fostering an inclusive and supportive environment where everyone can succeed.
+            </p>
+
+            <h2>Skills Developed</h2>
+            <p>
+                This role has significantly enhanced my communication, leadership, and cultural sensitivity skills. 
+                Working with international students from various backgrounds has improved my ability to adapt my 
+                communication style and approach to meet different needs and cultural contexts.
+            </p>
+
+            <h2>Impact & Outcomes</h2>
+            <p>
+                Through my work as a University Ambassador, I've contributed to improving the overall student experience at SUTD, 
+                helping to create a more welcoming and supportive environment for international students. This experience has 
+                also strengthened my commitment to community building and social impact in my future career.
+            </p>
+        </div>
+    </div>
+
+    <div id="interest-volunteer" class="project-detail">
+        <button class="close-btn" onclick="closeInterestDetail()">&times;</button>
+        <div class="project-detail-content">
+            <h1>⛑️ Volunteer Work: Roundsquare Aid Club</h1>
+            
+            <div class="project-gallery">
+                <div class="project-image">💰</div>
+                <div class="project-image">🌍</div>
+                <div class="project-image">📊</div>
+                <div class="project-image">🤝</div>
+            </div>
+
+            <h2>Organization Background</h2>
+            <p>
+                Roundsquare is an international network of schools that promotes global citizenship, environmental stewardship, 
+                and community service. Based in London, this organization coordinates aid efforts and educational exchanges 
+                across multiple continents, making a significant impact on communities worldwide.
+            </p>
+
+            <h2>Finance Team Leadership</h2>
+            <p>
+                <strong>Financial Management:</strong> As the finance team leader, I was responsible for managing the club's budget, 
+                tracking fundraising progress, and ensuring transparent allocation of resources to various aid projects. 
+                This role required attention to detail, analytical thinking, and strong organizational skills.
+            </p>
+            <p>
+                <strong>Fundraising Strategies:</strong> I developed and implemented fundraising strategies, coordinating with team 
+                members to organize events, campaigns, and donor outreach programs. This involved creating financial projections, 
+                monitoring campaign performance, and reporting to stakeholders.
+            </p>
+
+            <h2>Event Planning & Coordination</h2>
+            <p>
+                Beyond financial management, I actively contributed to the Events Planning Committee, where I helped organize 
+                fundraising events, awareness campaigns, and volunteer coordination meetings. This dual role allowed me to 
+                see projects from both financial and operational perspectives.
+            </p>
+
+            <h2>Skills & Personal Growth</h2>
+            <p>
+                <strong>Management Skills:</strong> Leading the finance team taught me how to delegate responsibilities effectively, 
+                manage deadlines, and coordinate with multiple stakeholders to achieve common goals.
+            </p>
+            <p>
+                <strong>Communication:</strong> Regular reporting to the international organization and local school administration 
+                improved my ability to present complex financial information clearly and concisely.
+            </p>
+            <p>
+                <strong>Teamwork:</strong> Working with diverse team members from different cultural backgrounds enhanced my 
+                collaborative skills and cultural awareness.
+            </p>
+
+            <h2>Impact & Legacy</h2>
+            <p>
+                Through our collective efforts, the Roundsquare Aid Club successfully raised significant funds for various 
+                international aid projects, including educational initiatives in developing countries and disaster relief efforts. 
+                This experience instilled in me a deep appreciation for social responsibility and the power of collective action.
+            </p>
+        </div>
+    </div>
+
+    <div id="interest-fitness" class="project-detail">
+        <button class="close-btn" onclick="closeInterestDetail()">&times;</button>
+        <div class="project-detail-content">
+            <h1>🏐 Fitness & Varsity Volleyball</h1>
+            
+            <div class="project-gallery">
+                <div class="project-image">🏐</div>
+                <div class="project-image">🏋️‍♀️</div>
+                <div class="project-image">🏆</div>
+                <div class="project-image">👥</div>
+            </div>
+
+            <h2>Volleyball Journey (2018-2023)</h2>
+            <p>
+                My five-year volleyball journey began as a team member and culminated in two years as Varsity Team Captain. 
+                This progression taught me the importance of dedication, continuous improvement, and leading by example. 
+                The sport became a significant part of my personal development and character building.
+            </p>
+
+            <h2>Leadership as Team Captain</h2>
+            <p>
+                <strong>Team Coordination:</strong> As captain, I was responsible for coordinating practice sessions, 
+                managing team dynamics, and serving as the primary liaison between players and coaching staff. 
+                This role required balancing individual player needs with overall team objectives.
+            </p>
+            <p>
+                <strong>Strategic Thinking:</strong> I learned to analyze each player's strengths and weaknesses, 
+                developing strategies that maximized our collective potential while ensuring everyone felt valued and included.
+            </p>
+            <p>
+                <strong>Conflict Resolution:</strong> Managing diverse personalities and resolving conflicts taught me 
+                valuable interpersonal skills that I now apply in professional team settings.
+            </p>
+
+            <h2>Key Life Lessons</h2>
+            <p>
+                <strong>Collaboration Over Competition:</strong> Volleyball taught me that true success comes from elevating 
+                the entire team rather than focusing solely on individual achievements. This mindset shapes my approach 
+                to group projects and professional collaborations.
+            </p>
+            <p>
+                <strong>Playing to Strengths:</strong> I learned to identify and leverage each team member's unique abilities, 
+                a skill that directly translates to technical team leadership and project management.
+            </p>
+            <p>
+                <strong>Collective Goals:</strong> The experience of balancing personal ambitions with team objectives has 
+                made me a more effective collaborator in academic and professional settings.
+            </p>
+
+            <h2>Personal Fitness & Weightlifting</h2>
+            <p>
+                <strong>Consistency & Discipline:</strong> My commitment to weightlifting four times a week has taught me 
+                the value of consistency and discipline in achieving long-term goals. This habit has improved not only 
+                my physical health but also my mental resilience and focus.
+            </p>
+            <p>
+                <strong>Goal-Oriented Mindset:</strong> Personal fitness has made me a more methodical and patient individual, 
+                understanding that meaningful progress requires sustained effort over time. This approach influences 
+                how I tackle complex technical projects and academic challenges.
+            </p>
+            <p>
+                <strong>Confidence & Resilience:</strong> The physical and mental challenges of consistent training have 
+                built confidence in my ability to overcome obstacles and persist through difficult periods, 
+                whether in academic pursuits or personal challenges.
+            </p>
+
+            <h2>Integration with Professional Life</h2>
+            <p>
+                The leadership, teamwork, and personal discipline gained through sports directly enhance my effectiveness 
+                in technical roles. The collaborative skills from volleyball help me work effectively in development teams, 
+                while the discipline from fitness training supports my ability to maintain focus during intensive 
+                coding sessions and project deadlines.
+            </p>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section id="contact" class="fade-in">
@@ -1559,6 +1838,29 @@
                 closeProjectDetail();
             }
         });
+
+        // Interest Detail Functionality
+        document.querySelectorAll('.interest-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const interestId = card.getAttribute('data-interest');
+                openInterestDetail(interestId);
+            });
+        });
+
+        function openInterestDetail(interestId) {
+            const detailPage = document.getElementById(`interest-${interestId}`);
+            if (detailPage) {
+                detailPage.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeInterestDetail() {
+            document.querySelectorAll('.project-detail').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            document.body.style.overflow = 'auto';
+        }        
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
